@@ -16,4 +16,5 @@ class Image:
         self.rect.y = self.y
 
     def draw(self, screen):
+        print(self.rect)
         screen.blit(self.image, self.rect)
