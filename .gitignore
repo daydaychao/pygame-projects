@@ -1,2 +1,4 @@
 /.lh/**
 /__pycache__/**
+objects/__pycache__
+modules/__pycache__
