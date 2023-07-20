@@ -2,3 +2,4 @@
 /__pycache__/**
 objects/__pycache__
 modules/__pycache__
+/handlers/__pycache__
