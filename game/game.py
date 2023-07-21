@@ -1,4 +1,5 @@
 import pygame
+import os
 
 from defs.get_weather_handler import get_weather_data
 from defs.input_handler import handle_input
@@ -8,12 +9,20 @@ from objects.Text import Text
 from objects.Image import Image
 
 
+
 def render_weather_data():  # 取得天氣資料
     global title, temperature, rain, description
     title, temperature, rain, description = get_weather_data()
 
 
 def main():
+
+    # 取得目前檔案所在目錄
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # 切換工作目錄到同層的資料夾
+    images_dir = os.path.join(current_dir, 'images')
+    fonts_dir = os.path.join(current_dir, 'fonts')
 
     # Setup
     window_width = 1280
@@ -43,13 +52,13 @@ def main():
     }
 
     # Game Created
-    logo_image = Image("images/pygame_lofi.png", center_x, -100, 40, 80)
-    button = Button("images/button.png", (center_x, window_height - 100))
+    logo_image = Image(images_dir+"/pygame_lofi.png", center_x, -100, 40, 80)
+    button = Button(images_dir+"/button.png", (center_x, window_height - 100))
     text = Text(None, 36, "AAA",  (255, 255, 255), (center_x, 20))
     player_pos = pygame.Vector2(center_x, center_y)
     screen.fill("gray")
 
-    path = 'fonts/NotoSansTC-Regular.otf'
+    path = fonts_dir+'/NotoSansTC-Regular.otf'
     titleText = Text(path, 24, '地區:'+title,  (255, 255, 255), (20, 20))
     descriptionText = Text(path, 24, '溫度:'+description,
                            (255, 255, 255), (20, 50))

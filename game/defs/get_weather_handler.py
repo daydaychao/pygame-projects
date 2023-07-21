@@ -6,7 +6,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import requests
+
+
+
+from selenium.webdriver.edge.webdriver import WebDriver as Edge 
 
 
 # 取得專案資料夾的絕對路徑
@@ -30,6 +33,7 @@ print(driver)
 
 def get_weather_data():
     # 發送GET請求獲取網頁內容
+    # driver = webdriver.Edge() #開啟fireFox瀏覽器
     url = 'https://www.cwb.gov.tw/V8/C/W/County/County.html?CID=64'
     driver.get(url)
 
