@@ -21,11 +21,11 @@ def main():
     fonts_dir = os.path.join(current_dir, 'common/fonts')
 
     # Setup
+    running = True
     window_width = 1280
     window_height = 720
     center_x = window_width / 2
     center_y = window_height / 2
-    running = True
     dt = 0
     pygame.init()
 
@@ -35,6 +35,8 @@ def main():
     # Event Handlers
 
     def handle_quit_event():
+        global running
+        running = False
         pygame.quit()
 
     def handle_button_click():
@@ -54,12 +56,12 @@ def main():
     player_pos = pygame.Vector2(center_x, center_y)
     screen.fill("gray")
 
-    path = fonts_dir+'/NotoSansTC-Regular.otf'
-    titleText = Text(path, 24, '地區:'+title,  (255, 255, 255), (20, 20))
-    descriptionText = Text(path, 24, '溫度:'+description,
+    font_path = fonts_dir+'/NotoSansTC-Regular.otf'
+    titleText = Text(font_path, 24, '地區:'+title,  (255, 255, 255), (20, 20))
+    descriptionText = Text(font_path, 24, '溫度:'+description,
                            (255, 255, 255), (20, 50))
-    rainText = Text(path, 24, '降雨機率:'+rain,  (255, 255, 255), (20, 80))
-    temperatureText = Text(path, 24, '天氣狀況:'+temperature,
+    rainText = Text(font_path, 24, '降雨機率:'+rain,  (255, 255, 255), (20, 80))
+    temperatureText = Text(font_path, 24, '天氣狀況:'+temperature,
                            (255, 255, 255), (20, 110))
 
     # Game Loop
@@ -70,23 +72,24 @@ def main():
             if event.type in event_handlers:
                 event_handlers[event.type]()
 
-        # 更新gray
-        screen.fill("black")
-        button.draw(screen)
-        text.draw(screen)
-        logo_image.draw(screen)
+        if running:
+            # 更新gray
+            screen.fill("black")
+            button.draw(screen)
+            text.draw(screen)
+            logo_image.draw(screen)
 
-        titleText.draw(screen, 'left')
-        descriptionText.draw(screen, 'left')
-        rainText.draw(screen, 'left')
-        temperatureText.draw(screen, 'left')
+            titleText.draw(screen, 'left')
+            descriptionText.draw(screen, 'left')
+            rainText.draw(screen, 'left')
+            temperatureText.draw(screen, 'left')
 
-        # 移動
-        handle_input(player_pos, dt)
-        pygame.draw.circle(screen, "yellow", player_pos, 40)
+            # 移動
+            handle_input(player_pos, dt)
+            pygame.draw.circle(screen, "yellow", player_pos, 40)
 
-        pygame.display.flip()
-        dt = clock.tick(60) / 1000
+            pygame.display.flip()
+            dt = clock.tick(60) / 1000
 
     pygame.quit()
 
