@@ -30,6 +30,7 @@ def main():
     pygame.init()
 
     screen = pygame.display.set_mode((window_width, window_height))
+    pygame.display.set_caption("抓取高雄天氣")
     clock = pygame.time.Clock()
 
     # Event Handlers
